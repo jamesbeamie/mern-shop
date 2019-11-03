@@ -8,6 +8,7 @@ const app = express();
 // Body parser middleware
 app.use(bodyParser.json());
 
+//db connection
 mongoose
   .connect(db)
   .then(() => {

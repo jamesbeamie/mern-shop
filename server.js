@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const db = require("./config/keys").mongoURI;
+const itemsPath = require("./routes/api/Items");
 
 const app = express();
 
@@ -17,6 +18,9 @@ mongoose
   .catch(err => {
     console.log(err);
   });
+
+//accessing routes
+app.use("/api/items", itemsPath);
 
 const port = process.env.PORT || 5000;
 

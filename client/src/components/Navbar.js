@@ -24,7 +24,7 @@ class NavBar extends Component {
   render() {
     return (
       <div>
-        <NavBar color='dark' dark expand='sm' className='mb-5'>
+        <Navbar color='dark' dark expand='sm' className='mb-5'>
           <Container>
             <NavbarBrand href='/'>Shopping</NavbarBrand>
             <NavbarToggler onClick={this.togler} />
@@ -36,7 +36,7 @@ class NavBar extends Component {
               </Nav>
             </Collapse>
           </Container>
-        </NavBar>
+        </Navbar>
       </div>
     );
   }

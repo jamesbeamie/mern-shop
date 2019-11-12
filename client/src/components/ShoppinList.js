@@ -2,28 +2,16 @@ import React, { Component } from "react";
 import { Button, ListGroupItem, ListGroup, Container } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import uuid from "uuid";
-import { stat } from "fs";
+import { connect } from "react-redux";
+import fetchItems from "../actions/busketAction";
+import PropTypes from "prop-types";
 
 class Shopping extends Component {
-  state = {
-    busket: [
-      {
-        id: uuid(),
-        name: "thunderbbolt"
-      },
-      {
-        id: uuid(),
-        name: "iMac"
-      },
-      {
-        id: uuid(),
-        name: "Monitor"
-      }
-    ]
-  };
-
+  componentDidMount() {
+    this.props.fetchItems();
+  }
   render() {
-    const { busket } = this.state;
+    const { busket } = this.props.busket;
     return (
       <Container>
         <Button
@@ -67,4 +55,16 @@ class Shopping extends Component {
     );
   }
 }
-export default Shopping;
+Shopping.propTypes = {
+  fetchItems: PropTypes.func.isRequired,
+  bucket: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  busket: state.bucket
+});
+// export default Shopping;
+export default connect(
+  mapStateToProps,
+  { fetchItems }
+)(Shopping);

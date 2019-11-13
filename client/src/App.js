@@ -5,13 +5,18 @@ import store from "./redux/store";
 import "./App.css";
 import NavBar from "./components/Navbar";
 import Shopping from "./components/ShoppinList";
+import ItemModal from "./components/itemModal";
+import { Container } from "reactstrap";
 
 function App() {
   return (
     <Provider store={store}>
-      <div className='App'>
+      <div className="App">
         <NavBar />
-        <Shopping />
+        <Container>
+          <ItemModal />
+          <Shopping />
+        </Container>
       </div>
     </Provider>
   );

@@ -1,47 +1,40 @@
 import React, { Component } from "react";
 import { Button, ListGroupItem, ListGroup, Container } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import uuid from "uuid";
 import { connect } from "react-redux";
 import fetchItems from "../actions/busketAction";
+import deleteBusketAction from "../actions/deleteItemAction";
 import PropTypes from "prop-types";
 
 class Shopping extends Component {
   componentDidMount() {
     this.props.fetchItems();
   }
+  onDeleteClick = id => {
+    // deleteBusketAction;
+    this.props.deleteBusketAction(id);
+  };
   render() {
     const { busket } = this.props.busket;
+    const onDeleter = () => {
+      const idee = busket.map(anItem => {
+        return anItem.id;
+      });
+      this.onDeleteClick(idee[0]);
+      console.log("idee", idee[0]);
+    };
     return (
       <Container>
-        <Button
-          color='dark'
-          style={{ marginBottom: "2rem" }}
-          onClick={() => {
-            const name = prompt("Enter Item name");
-            if (name) {
-              this.setState(state => ({
-                busket: [...this.state.busket, { id: uuid(), name }]
-              }));
-            }
-          }}
-        >
-          Add to Busket
-        </Button>
         <ListGroup>
-          <TransitionGroup className='shopping-list'>
+          <TransitionGroup className="shopping-list">
             {busket.map(({ id, name }) => (
-              <CSSTransition key={id} timeout={500} classNames='fade'>
+              <CSSTransition key={id} timeout={500} classNames="fade">
                 <ListGroupItem>
                   <Button
-                    className='remove-btn'
-                    color='danger'
-                    size='sm'
-                    onClick={() => {
-                      this.setState(state => ({
-                        busket: state.busket.filter(item => item.id !== id)
-                      }));
-                    }}
+                    className="remove-btn"
+                    color="danger"
+                    size="sm"
+                    onClick={onDeleter}
                   >
                     &times;
                   </Button>
@@ -57,14 +50,13 @@ class Shopping extends Component {
 }
 Shopping.propTypes = {
   fetchItems: PropTypes.func.isRequired,
-  bucket: PropTypes.object.isRequired
+  bucket: PropTypes.object
 };
 
 const mapStateToProps = state => ({
   busket: state.bucket
 });
 // export default Shopping;
-export default connect(
-  mapStateToProps,
-  { fetchItems }
-)(Shopping);
+export default connect(mapStateToProps, { fetchItems, deleteBusketAction })(
+  Shopping
+);

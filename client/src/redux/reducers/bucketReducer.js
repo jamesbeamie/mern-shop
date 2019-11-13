@@ -27,6 +27,11 @@ const busketReducer = (state = initialState, action) => {
       return {
         ...state
       };
+    case DELETE_ITEM:
+      return {
+        ...state,
+        busket: state.busket.filter(anItem => anItem.id !== action.payload)
+      };
     default:
       return state;
   }

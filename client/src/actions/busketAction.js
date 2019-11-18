@@ -1,9 +1,18 @@
-import { GET_ITEM, ADD_ITEM, DELETE_ITEM } from "../actions/types";
+import axios from "axios";
+import { GET_ITEM, BUSKET_LOADING } from "../actions/types";
 
-const fetchItems = () => {
-  return {
-    type: GET_ITEM
-  };
+export const fetchItems = () => dispatch => {
+  dispatch(toglleBusketFetching());
+  axios.get("/api/items").then(res =>
+    dispatch({
+      type: GET_ITEM,
+      payload: res.data
+    })
+  );
 };
 
-export default fetchItems;
+export const toglleBusketFetching = () => {
+  return {
+    type: BUSKET_LOADING
+  };
+};

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, ListGroupItem, ListGroup, Container } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { connect } from "react-redux";
-import fetchItems from "../actions/busketAction";
+import { fetchItems } from "../actions/busketAction";
 import deleteBusketAction from "../actions/deleteItemAction";
 import PropTypes from "prop-types";
 

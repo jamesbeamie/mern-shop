@@ -12,7 +12,6 @@ import {
 
 import { connect } from "react-redux";
 import addToBusket from "../actions/addToBusket";
-import uuid from "uuid";
 
 class ItemModal extends Component {
   state = {
@@ -36,7 +35,6 @@ class ItemModal extends Component {
     e.preventDefault();
     console.log("sawa");
     const newItem = {
-      id: uuid(),
       name: this.state.name
     };
 

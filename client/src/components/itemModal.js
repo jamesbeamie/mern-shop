@@ -11,7 +11,7 @@ import {
 } from "reactstrap";
 
 import { connect } from "react-redux";
-import addToBusket from "../actions/addToBusket";
+import AddToBusket from "../actions/addToBusket";
 
 class ItemModal extends Component {
   state = {
@@ -33,12 +33,12 @@ class ItemModal extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log("sawa");
+    console.log("sawa", this.state.name);
     const newItem = {
       name: this.state.name
     };
 
-    this.props.addToBusket(newItem);
+    this.props.AddToBusket(newItem);
     this.toggle();
   };
 
@@ -46,7 +46,7 @@ class ItemModal extends Component {
     return (
       <div>
         <Button
-          color="dark"
+          color='dark'
           onClick={this.toggle}
           style={{ marginBottom: "2rem" }}
         >
@@ -58,17 +58,17 @@ class ItemModal extends Component {
           <ModalBody>
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
-                <Label for="item">Item</Label>
+                <Label for='item'>Item</Label>
                 <Input
-                  type="text"
-                  name="name"
-                  id="item"
-                  placeholder="Add shoppong item"
+                  type='text'
+                  name='name'
+                  id='item'
+                  placeholder='Add shoppong item'
                   onChange={this.onChange}
                   block
                 />
                 <Button
-                  color="dark"
+                  color='dark'
                   style={{ marginTop: "2rem" }}
                   block
                   onSubmit={this.onSubmit}
@@ -87,4 +87,4 @@ class ItemModal extends Component {
 const mapStateToProps = state => ({
   busket: state.busket
 });
-export default connect(mapStateToProps, { addToBusket })(ItemModal);
+export default connect(mapStateToProps, { AddToBusket })(ItemModal);

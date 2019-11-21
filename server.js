@@ -11,7 +11,11 @@ app.use(bodyParser.json());
 
 //db connection
 mongoose
-  .connect(db)
+  .connect(db, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+  })
   .then(() => {
     console.log("connected");
   })
